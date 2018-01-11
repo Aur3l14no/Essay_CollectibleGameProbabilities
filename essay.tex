@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{mathtools}
 \usepackage{amssymb}
+\usepackage{float}
 
 % *** CITATION PACKAGES ***
 %
@@ -134,8 +135,6 @@ Probability, Collectible Card Game.
     \end{aligned}
   \right.
   $
-  
-  可能集P (Possible): 对于目标集$T$, 它的可能集$P=flatten(\{G_{k_1}, G_{k_2}, \dots, G_{k_n} | G_{k_i} \in C_i, i = 1,\dots,|T|\})$
 
   目标的完成: 对于目标集$T = \{C_1, C_2, \dots, C_n\}$和已收集的物品集合$S$, 目标的完成当且仅当
   $ \exists P = \{G_{k_1}, G_{k_2}, \dots, G_{k_n} | G_{k_i} \in C_i\}, s.t. flatten(P) \subseteq S$
@@ -197,7 +196,9 @@ Probability, Collectible Card Game.
   P(\bigcup_{i=1}^n A_i) = \sum\limits_{k=1}^n (-1)^{k-1} \sum_{\substack{I \subset \{ 1,\dots, n \}\\ |I|=k}} P(A_I)
   $$
   
-  在我们的问题中, 若记已收集集合为S, 事件$A_i = S \subset P_i$, 目标集$T$的可能集为$P_1,\dots,P_n$, 则当获得m件装备时完成收集目标的概率为
+  在我们的问题中, 若记已收集集合为$S$， 对于目标集$T$, 定义事件$A_j = flatten(\{G_{k_1}, G_{k_2}, \dots, G_{k_n} | G_{k_i} \in C_i, i = 1,\dots,|T|\}) \subset S$, 其中$j=\overline{k_1 k_2 \dots k_n}$
+  
+  则当获得m件装备时完成收集目标的概率为
   \begin{equation*}
     \begin{split}
       & P(\bigcup_{i=1}^n A_i) \\
@@ -207,11 +208,15 @@ Probability, Collectible Card Game.
   \end{equation*}
 
   \subsection{模型的验证}
+<<<<<<< HEAD
     地下城与勇士的装备获取是可以用程序模拟的. 我们模拟了3000名玩家, 统计了完成收集任务的玩家占总玩家数的比重, 并将这个数据与数学推导的结果进行了比较, 结果如图\ref{fig:dnf_comprehensive}
 
 
   \subsection{结论}
     我们可以看到程序模拟出的结果与我们用模型计算得出的结果高度吻合，证明了我们建模的正确性。同时我们也可以看到，尽管达成目标的途径变为了4倍，但是为了完成目标所需要获得的物品数缺只是减少了15\%左右，从这个角度来看，可以看出地下城与勇士的耐玩程度和毕业通关的困难程度。
+=======
+    地下城与勇士的装备获取是可以用程序模拟的. 我们模拟了3000名玩家, 统计了完成收集任务的玩家占总玩家数的比重, 并将这个数据与数学推导的结果进行了比较, 结果如图\ref{fig:dnf_comprehensive}所示. 
+>>>>>>> 532e29100cf7bb82af3cacf630685a4bc81ecb14
     
     
 
@@ -223,16 +228,20 @@ Probability, Collectible Card Game.
 某刘姓玩家经过长时间的努力，终于只剩下2个SSR没有获得了，他为了集齐所有的SSR实现一直以来苦苦追求的目标积攒了1000次抽卡的机会，已知每次抽卡都有1\%的几率抽到一张随机的SSR，阴阳师目前一共有18个不同的SSR，请问刘同学有多大的概率能够实现它的目标呢？
 
 \subsection{模型的建立}
+<<<<<<< HEAD
 直接套用上面推倒出的马尔科夫链模型即可得出结论，我们可以看到该同学只有不到20\%的可能性能够抽到剩下的两个他所没有的SSR达成目标，如图\ref{fig:yys1k}所示. 那么我们再来看看到底要多少抽才能比较有把握地达成目标呢？图\ref{fig:yys1w}告诉我们一共需要4000多抽，该同学才能有80\%的较大把握达成搜集齐所有SSR的目标。
+=======
+直接套用上面推导出的马尔科夫链模型即可得出结论，我们可以看到该同学只有不到20\%的可能性能够抽到剩下的两个他所没有的SSR达成目标，如图\ref{fig:yys1k}所示. 那么我们再来看看到底要多少抽才能比较有把握地达成目标呢？图\ref{fig:yys1w}告诉我们一共需要4000多抽，该同学才能有80\%的较大把握达成搜集齐所有SSR的目标。
+>>>>>>> 532e29100cf7bb82af3cacf630685a4bc81ecb14
 
-\begin{figure}[!h]
+\begin{figure}[H]
   \centering
   \includegraphics[width=20pc]{img/yys1k.png}
   \caption{阴阳师一千抽概率图}
   \label{fig:yys1k}
 \end{figure}
 
-\begin{figure}[!h]
+\begin{figure}[H]
   \centering
   \includegraphics[width=20pc]{img/yys1w.png}
   \caption{阴阳师一万抽概率图}
