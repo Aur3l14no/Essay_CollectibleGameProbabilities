@@ -58,36 +58,59 @@ Probability, Collectible Card Game.
 
 \section{DNF中的装备收集问题1}
 
-\subsection{问题描述}
+  \subsection{问题描述}
+    地下城与勇士中存在形形色色的装备, 在当前版本中, 总共有104件最高级别的装备, 玩家只能随机获得这些装备. 而玩家身上总共有12个装备槽, 因此完美获得所有装备就意味着玩家要获取这12个部位上最合适的装备.
 
-\subsection{模型建立}
+    于是我们提出了这样的一个问题, 玩家获得了n件装备, 每件装备都等可能地取自容量为N的装备池. 玩家想凑齐其中指定的M件装备, 求凑齐的概率P与获得装备的数量n之间的关系.
 
-  \begin{align}
-    P(\text{M件全齐}) &= 1-P(\text{M件中至少缺1件})\\
-    &= 1-\frac{\text{至少缺1件的有序出装方案数}}{N^n}\\
-    &= 1-\frac{\sum_{k=1}^{k=M}(-1)^k\binom{M}{k}(N-k)^n}{N^n}\\
-    &= \frac{\sum_{k=0}^{k=M}(-1)^k\binom{M}{k}(N-k)^n}{N^n}
-  \end{align}
-  
-  其中第(2)步到第(3)步应用了容斥原理, 具体推导如下.
-  
-  \begin{equation*}
-    \begin{split}
-      &~~~~~\text{至少缺1件的有序出装方案数} \\
-      =&~~~~~\text{至少缺装备1的有序出装方案数} \\
-      &+ \text{至少缺装备2的有序出装方案数} \\
-      &+ \cdots \\
-      &+ \text{至少缺装备M的有序出装方案数} \\
-      &- \text{至少缺装备1, 装备2的有序出装方案数} \\
-      &- \text{至少缺装备1, 装备3的有序出装方案数} \\
-      &- \cdots \\
-      &- \text{至少缺装备M-1, M的有序出装方案数} \\
-      &+ \text{至少缺装备1, 2, 3的有序出装方案数} \\
-      &+ \cdots \\
-      &\cdots
-    \end{split}
-  \end{equation*}
+  \subsection{模型假设}
+    \begin{enumerate}
+      \item 每件装备的获取概率是均等的
+      \item 每次装备的获取是独立的
+    \end{enumerate}
 
+  \subsection{模型建立}
+    概率等于所有事件中的某些事件在所有事件中所占的比率, 所以凑齐的概率就是凑齐的事件在所有事件中所占的比率. 我们可以得到
+    \begin{align}
+      P(\text{M件全齐}) &= 1-P(\text{M件中至少缺1件})\\
+      &= 1-\frac{\text{至少缺1件的有序出装方案数}}{N^n}\\
+      &= 1-\frac{\sum_{k=1}^{k=M}(-1)^k\binom{M}{k}(N-k)^n}{N^n}\\
+      &= \frac{\sum_{k=0}^{k=M}(-1)^k\binom{M}{k}(N-k)^n}{N^n}
+    \end{align}
+    
+    其中第(2)步到第(3)步应用了容斥原理, 具体推导如下.
+    
+    \begin{equation*}
+      \begin{split}
+        &~~~~~\text{至少缺1件的有序出装方案数} \\
+        =&~~~~~\text{至少缺装备1的有序出装方案数} \\
+        &+ \text{至少缺装备2的有序出装方案数} \\
+        &+ \cdots \\
+        &+ \text{至少缺装备M的有序出装方案数} \\
+        &- \text{至少缺装备1, 装备2的有序出装方案数} \\
+        &- \text{至少缺装备1, 装备3的有序出装方案数} \\
+        &- \cdots \\
+        &- \text{至少缺装备M-1, M的有序出装方案数} \\
+        &+ \text{至少缺装备1, 2, 3的有序出装方案数} \\
+        &+ \cdots \\
+        &\cdots
+      \end{split}
+    \end{equation*}
+
+    综上
+    $$
+    P(\text{M件全齐})=\frac{\sum_{k=0}^{k=M}(-1)^k\binom{M}{k}(N-k)^n}{N^n}
+    $$
+
+  \subsection{求解}
+    代入问题描述中的实际数据, 即N=104, M=12, 得到凑齐概率P与获得装备的数量n之间的关系如图\ref{fig:solution1}所示
+
+    \begin{figure*}[!ht]
+    \centering
+    \includegraphics[width=30pc]{img/solution1.png}
+    \caption{DNF中的装备收集问题1}
+    \label{fig:solution1}
+    \end{figure*}
 
 
 \section{DNF中的装备收集问题2}
@@ -167,6 +190,9 @@ Probability, Collectible Card Game.
   \subsection{补充}
   对于已有一定的物品积累额玩家，可以在物品组中减去其已有的物品
 
+
+  \subsection{模型的验证}
+    地下城与勇士的装备获取是可以用程序模拟的. 我们模拟了3000名玩家, 统计了完成收集任务的玩家占总玩家数的比重, 并将这个数据与数学推导的结果进行了比较. 
 
 \section{模型的建立}
 
