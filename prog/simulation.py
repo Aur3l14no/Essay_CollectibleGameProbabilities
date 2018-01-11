@@ -14,6 +14,7 @@ os.chdir('prog')
 
 G = BitVector.BitVector
 
+
 class Simulation:
     def __init__(self):
         self.item_json = []
@@ -124,8 +125,8 @@ def main():
     """ entry function
     """
     MAX_ITEMS = 500
-    TRIALS = 3000
-    TARGET = 0
+    TRIALS = 10000
+    TARGET = 1
     try:
         with open('result-target%d-%d-%d' % (TARGET, MAX_ITEMS, TRIALS), 'rb') as f:
             result = pickle.load(f)
