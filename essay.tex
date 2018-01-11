@@ -31,12 +31,12 @@
 \renewcommand{\IEEEkeywordsname}{关键词}
 \begin{abstract}
 
-  网络游戏常需要玩家收集物品, 玩家每次获得的物品往往是从一个物品池中由系统随机选取的. 对于玩家, 他们的目标常常是集齐一套物品, 但往往不了解集齐物品的难度以及自己在这个收集过程中已完成的进度. 我们通过对游戏中的收集要素进行数学建模, 从而定量地考察了一个游戏中完成收集目标的难度, 以帮助玩家更好地了解自己所玩的游戏.
+  网络游戏常需要玩家收集物品, 而玩家每次获得的物品往往是随机的. 同时, 玩家的收集目标也较为复杂. 我们对游戏中的收集要素进行了数学建模, 从而定量考察了付出一定时, 完成收集要素的概率, 以帮助玩家更好地了解自己所玩的游戏.
 
 \end{abstract}
 \renewcommand{\abstractname}{Abstract}
 \begin{abstract}
-  Collecting elemnts often enter online games. In some of the games, the item that you get every time is random. Players 
+  Collecting often plays a part in online games. Often, items the player get are random. Moreover, the collecting goal of players are complicated and requires delicate modeling. Therefore, this paper give a mathematical model of the collecting tasks in online games and analyze the difficulty in achieving them.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -224,7 +224,7 @@ Probability, Collectible Card Game.
 某刘姓玩家经过长时间的努力，终于只剩下2个SSR没有获得了，他为了集齐所有的SSR实现一直以来苦苦追求的目标积攒了1000次抽卡的机会，已知每次抽卡都有1\%的几率抽到一张随机的SSR，阴阳师目前一共有18个不同的SSR，请问刘同学有多大的概率能够实现它的目标呢？
 
 \subsection{模型的建立}
-直接套用上面推倒出的马尔科夫链模型即可得出结论，我们可以看到该同学只有不到20\%的可能性能够抽到剩下的两个他所没有的SSR达成目标，如图\ref{fig:yys1k}所示. 那么我们再来看看到底要多少抽才能比较有把握地达成目标呢？图\ref{fig:yys1w}告诉我们一共需要4000多抽，该同学才能有80\%的较大把握达成搜集齐所有SSR的目标。
+直接套用上面推导出的马尔科夫链模型即可得出结论，我们可以看到该同学只有不到20\%的可能性能够抽到剩下的两个他所没有的SSR达成目标，如图\ref{fig:yys1k}所示. 那么我们再来看看到底要多少抽才能比较有把握地达成目标呢？图\ref{fig:yys1w}告诉我们一共需要4000多抽，该同学才能有80\%的较大把握达成搜集齐所有SSR的目标。
 
 \begin{figure}[H]
   \centering
