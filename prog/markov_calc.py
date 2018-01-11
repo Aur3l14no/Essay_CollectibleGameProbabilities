@@ -13,15 +13,13 @@ def calc_transition(n, m):
 def calc_probability(state):
     ret = 0    
     for m, probability in enumerate(state):
-        if m < 12:
-            continue
         if m > 18:
             break
         t = 0
         if m >= 12:
             t += 4*comb(6, 18-m)
         if m >= 11:
-            t -= 2*comb(7, 18-m)
+            t -= 2*comb(5, 18-m)
         if m >= 17:
             t -= 2*comb(1, 18-m)
         if m >= 18:
@@ -54,12 +52,12 @@ def main():
     state[0] = 1
     transition = calc_transition(N, M)
     probabilities = []
-    for i in range(K):
+    for i in range(K+1):
         probabilities.append(calc_probability(state))
         state = state.dot(transition)
         # if i % 50 == 0:
         #     print(state)
-    # print(probabilities)
+    print(probabilities)
     myplot(probabilities)
     
 

@@ -126,7 +126,7 @@ def main():
     """
     MAX_ITEMS = 500
     TRIALS = 10000
-    TARGET = 1
+    TARGET = 0
     try:
         with open('result-target%d-%d-%d' % (TARGET, MAX_ITEMS, TRIALS), 'rb') as f:
             result = pickle.load(f)
@@ -152,7 +152,7 @@ def main():
         result = simulation.trials(max_item_retrieved=MAX_ITEMS, trial_total=TRIALS)
         with open('result-target%d-%d-%d' % (TARGET, MAX_ITEMS, TRIALS), 'wb') as f:
             pickle.dump(result, f)
-    # print(result)
+    print(result)
     myplot(result)
 
 if __name__ == "__main__":
