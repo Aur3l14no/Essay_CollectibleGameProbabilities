@@ -77,7 +77,8 @@ def generate_random(item_json):
 
 def random_item():
     try:
-        return next(i for i, x in enumerate(random_list) if x > random.random())-1
+        rand = random.random()
+        return next(i for i, x in enumerate(random_list) if x > rand)
     except StopIteration:
         return None
 
@@ -100,7 +101,15 @@ def main():
     random.seed(time.time())
     item_json, groups = load_items('items.json')
     item_total = len(item_json)
-    target = [
+    target1 = [
+        [groups['皮甲']],
+        [groups['太刀']],
+        [groups['首饰']],
+        [groups['辅助装备']],
+        [groups['魔法石']],
+        [groups['耳环']]
+    ]
+    target2 = [
         [groups['皮甲'], groups['轻甲']],
         [groups['太刀'], groups['巨剑']],
         [groups['首饰']],
@@ -108,11 +117,11 @@ def main():
         [groups['魔法石']],
         [groups['耳环']]
     ]
-    possibles = generate_possibles(target)
+    possibles = generate_possibles(target1)
     print(len(possibles))
     for possible in possibles:
         print(possible)
-    trial_times = 1000
+    trial_times = 10000
     success = 0
 
     try:
@@ -120,6 +129,7 @@ def main():
         print(random_list)
     except Exception as e:
         print(e)
+
     for i in range(trial_times):
         if trial(item_count=491, possibles=possibles):
             success += 1
