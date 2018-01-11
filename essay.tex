@@ -137,6 +137,8 @@ Probability, Collectible Card Game.
   \right.
   $
   
+  可能集P (Possible): 对于目标集$T$, 它的可能集$P=flatten(\{G_{k_1}, G_{k_2}, \dots, G_{k_n} | G_{k_i} \in C_i, i = 1,\dots,|T|\})$
+
   目标的完成: 对于目标集$T = \{C_1, C_2, \dots, C_n\}$和已收集的物品集合$S$, 目标的完成当且仅当
   $ \exists P = \{G_{k_1}, G_{k_2}, \dots, G_{k_n} | G_{k_i} \in C_i\}, s.t. flatten(P) \subseteq S$
   
@@ -153,6 +155,8 @@ Probability, Collectible Card Game.
 
   目标集: $T=\{C_1, C_2, C_3, C_4, C_5, C_6\}$
 
+  
+
   目标的完成:获得了皮甲套和轻甲套之一, 太刀和巨剑之一, 首饰套, 辅助装备, 魔法石, 耳环.即$P=\{G_{1}, G_{3}, G_{5}, G_{6}, G_{7}, G_{8}\}$或$\{G_{1}, G_{4}, G_{5}, G_{6}, G_{7}, G_{8}\}$或$\{G_{2}, G_{3}, G_{5}, G_{6}, G_{7}, G_{8}\}$或$\{G_{2}, G_{4}, G_{5}, G_{6}, G_{7}, G_{8}\}$
 
 
@@ -166,7 +170,7 @@ Probability, Collectible Card Game.
   \begin{table*}[]
     \centering
     \caption{状态转移矩阵}
-    \label{Markov}
+    \label{tab:markov}
     \begin{tabular}{c|cccccccccc}
         & 0 & 1 & 2 & 3 & ... & s & s+1 & ... & m-1 & m \\ \hline
     0   & $1-\frac{m}{n}$ & $\frac{m}{n}$ &   &   &     &   &     &     &     &   \\
@@ -179,13 +183,38 @@ Probability, Collectible Card Game.
     m   &   &   &   &   &     &   &     &     &     &  $1$
     \end{tabular}
   \end{table*}
+
+  \begin{figure*}[!ht]
+    \centering
+    \includegraphics[width=45pc]{img/everything_about_dnf.png}
+    \caption{DNF收集完成概率理论计算与程序模拟对比图, 其中Basic曲线描述的是收集问题1, Advanced曲线描述的是收集问题2, 横坐标代表获取装备此数, 纵坐标代表完成收集目标的概率(理论)/频率(模拟)}
+    \label{fig:dnf_comprehensive}
+  \end{figure*}
   
   获得k个物品后，经过了k次状态转移，得到获得物品的概率分布情况$\{1,0,0,...,0\}*T^k$
+
+  
+  $$
+  P(\bigcup_{i=1}^n A_i) = \sum\limits_{k=1}^n (-1)^{k-1} \sum_{\substack{I \subset \{ 1,\dots, n \}\\ |I|=k}} P(A_I)
+  $$
+  
+  在我们的问题中, 若记已收集集合为S, 事件$A_i = S \subset P_i$, 目标集$T$的可能集为$P_1,\dots,P_n$, 则当获得m件装备时完成收集目标的概率为
+  \begin{equation*}
+    \begin{split}
+      & P(\bigcup_{i=1}^n A_i) \\
+      = & \sum\limits_{k=1}^n (-1)^{k-1} \sum_{\substack{I \subset \{ 1,\dots, n \}\\ |I|=k}} P(P_I\subset S)\\
+      = & \sum\limits_{k=1}^n (-1)^{k-1} \sum_{\substack{I \subset \{ 1,\dots, n \}\\ |I|=k \\ m \geq P_I}} \frac{\binom{|P_I|}{|P_I|} \binom{n-|P_I|}{m-|P_I|}}{\binom{n}{m}}
+    \end{split}
+  \end{equation*}
+
+
 
 
 
   \subsection{模型的验证}
-    地下城与勇士的装备获取是可以用程序模拟的. 我们模拟了3000名玩家, 统计了完成收集任务的玩家占总玩家数的比重, 并将这个数据与数学推导的结果进行了比较. 
+    地下城与勇士的装备获取是可以用程序模拟的. 我们模拟了3000名玩家, 统计了完成收集任务的玩家占总玩家数的比重, 并将这个数据与数学推导的结果进行了比较, 结果如图\ref{fig:dnf_comprehensive}
+    
+    
 
 
 
@@ -198,34 +227,6 @@ Probability, Collectible Card Game.
 \subsection{模型的建立}
 直接套用上面推倒出的马尔科夫链模型即可得出结论，我们可以看到该同学只有不到20\%的可能性能够抽到剩下的两个他所没有的SSR达成目标，那么我们再来看看到底要多少抽才能比较有把握地达成目标呢？图二告诉我们一共需要4000多抽，该同学才能有80\%的较大把握达成搜集齐所有SSR的目标。
 如\ref{fig:yys1k}所示
-\begin{figure*}[!ht]
-  \centering
-  \includegraphics[width=30pc]{img/survey_fig1.jpg}
-  \caption{迁移学习方法与情境的关系}
-  \label{fig:survey_method}
-  \end{figure*}
-
-
-
-
-
-\section{模型的建立}
-
-针对上面的研究问题, 我们可以对迁移学习的情境和方法进行分类. 
-
-\begin{table*}[!ht]
-\centering
-\caption{迁移学习的方法}
-\label{tab:survey_method}
-\includegraphics[width=40pc]{img/survey_tab3.jpg}
-\end{table*}
-
-\begin{figure*}[!ht]
-\centering
-\includegraphics[width=30pc]{img/survey_fig1.jpg}
-\caption{迁移学习方法与情境的关系}
-\label{fig:survey_method}
-\end{figure*}
 
 
 
